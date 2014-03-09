@@ -772,8 +772,7 @@ typedef enum
   TidyAttr_ARIA_VALUEMIN,
   TidyAttr_ARIA_VALUENOW,
   TidyAttr_ARIA_VALUETEXT,
-
-
+  TidyAttr_ROLE,
 
 
   N_TIDY_ATTRIBS              /**< Must be last */

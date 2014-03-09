@@ -391,6 +391,8 @@ static const Attribute attribute_defs [] =
   { TidyAttr_ARIA_VALUENOW,           "aria-valuenow",           CH_PCDATA   },
   { TidyAttr_ARIA_VALUETEXT,          "aria-valuetext",          CH_PCDATA   },
 
+  { TidyAttr_ROLE,              "role",                  CH_PCDATA    },
+
   /* this must be the final entry */
   { N_TIDY_ATTRIBS,             NULL,                    NULL         }
 };

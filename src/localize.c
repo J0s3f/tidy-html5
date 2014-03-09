@@ -1757,14 +1757,6 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
 
         }
 
-        tidy_out(doc, "For further advice on how to make your pages accessible\n");
-        tidy_out(doc, "see %s", ACCESS_URL );
-        if ( cfg(doc, TidyAccessibilityCheckLevel) > 0 )
-            tidy_out(doc, " and %s", ATRC_ACCESS_URL );
-        tidy_out(doc, ".\n" );
-        tidy_out(doc, ". You may also want to try\n" );
-        tidy_out(doc, "\"http://www.cast.org/bobby/\" which is a free Web-based\n");
-        tidy_out(doc, "service for checking URLs for accessibility.\n\n");
     }
 
     if (doc->badLayout)

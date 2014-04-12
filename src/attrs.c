@@ -1953,7 +1953,10 @@ AttVal *SortAttVal( AttVal *list, TidyAttrSortStrategy strat)
 
     insize = 1;
 
+#pragma warning( push )
+#pragma warning(disable:4127)
     while (1) {
+#pragma warning( pop )
         p = list;
         list = NULL;
         tail = NULL;

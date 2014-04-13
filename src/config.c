@@ -313,6 +313,8 @@ static const TidyOptionImpl option_defs[] =
   { TidySortAttributes,          PP, "sort-attributes",             IN, TidySortAttrNone,ParseSorter,       sorterPicks     },
   { TidyMergeSpans,              MU, "merge-spans",                 IN, TidyAutoState,   ParseAutoBool,     autoBoolPicks   },
   { TidyAnchorAsName,            MU, "anchor-as-name",              BL, yes,             ParseBool,         boolPicks       },
+  { OptBoolUnofficial_KeepMySpaces, MU, "keep-my-spaces", BL, no, ParseBool, boolPicks },
+  { OptBoolUnofficial_MorePreformatted, MU, "more-preformatted", BL, no, ParseBool, boolPicks },
   { N_TIDY_OPTIONS,              XX, NULL,                          XY, 0,               NULL,              NULL            }
 };
 

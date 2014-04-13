@@ -204,6 +204,8 @@ typedef enum
   TidySortAttributes,      /**< Sort attributes */
   TidyMergeSpans,       /**< Merge multiple SPANs */
   TidyAnchorAsName,    /**< Define anchors as name attributes */
+  OptBoolUnofficial_KeepMySpaces,
+  OptBoolUnofficial_MorePreformatted,
   N_TIDY_OPTIONS       /**< Must be last */
 } TidyOptionId;
 

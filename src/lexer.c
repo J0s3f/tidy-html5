@@ -2126,7 +2126,8 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     /* was previous character white? */
                     if (lexer->waswhite)
                     {
-                        if (mode != Preformatted && mode != IgnoreMarkup)
+                        if (mode != Preformatted && mode != IgnoreMarkup
+                            && !cfgBool( doc, OptBoolUnofficial_KeepMySpaces ) )
                         {
                             --(lexer->lexsize);
                             SetLexerLocus( doc, lexer );

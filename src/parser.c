@@ -1372,7 +1372,10 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             }
 
             element->closed = yes;
-            TrimSpaces( doc, element );
+
+            if( !cfgBool( doc, OptBoolUnofficial_KeepMySpaces ) )
+                TrimSpaces( doc, element );
+
             return;
         }
 
@@ -3544,6 +3547,9 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
                 mode = IgnoreWhitespace;
             }
 
+            if( cfgBool( doc, OptBoolUnofficial_MorePreformatted ) )
+                mode = Preformatted;
+
             if (node->implicit)
                 TY_(ReportError)(doc, body, node, INSERTING_TAG);
 
@@ -4222,7 +4228,9 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
     AttributeChecks(doc, &doc->root);
     ReplaceObsoleteElements(doc, &doc->root);
     TY_(DropEmptyElements)(doc, &doc->root);
-    CleanSpaces(doc, &doc->root);
+
+    if( !cfgBool( doc, OptBoolUnofficial_KeepMySpaces ) )
+        CleanSpaces(doc, &doc->root);
 
     if (cfgBool(doc, TidyEncloseBodyText))
         EncloseBodyText(doc);
@@ -4274,6 +4282,9 @@ static void ParseXMLElement(TidyDocImpl* doc, Node *element, GetTokenMode mode)
     /* if node is pre or has xml:space="preserve" then do so */
 
     if ( TY_(XMLPreserveWhiteSpace)(doc, element) )
+        mode = Preformatted;
+
+    if( cfgBool( doc, OptBoolUnofficial_MorePreformatted ) )
         mode = Preformatted;
 
     while ((node = TY_(GetToken)(doc, mode)) != NULL)

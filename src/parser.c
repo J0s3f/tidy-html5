@@ -372,6 +372,9 @@ static void TrimTrailingSpace( TidyDocImpl* doc, Node *element, Node *last )
     Lexer* lexer = doc->lexer;
     byte c;
 
+    if( cfgBool( doc, OptBoolUnofficial_KeepMySpaces ) )
+        return;
+
     if (TY_(nodeIsText)(last))
     {
         if (last->end > last->start)
@@ -468,6 +471,9 @@ static void TrimInitialSpace( TidyDocImpl* doc, Node *element, Node *text )
     Lexer* lexer = doc->lexer;
     Node *prev, *node;
 
+    if( cfgBool( doc, OptBoolUnofficial_KeepMySpaces ) )
+        return;
+
     if ( TY_(nodeIsText)(text) && 
          lexer->lexbuf[text->start] == ' ' && 
          text->start < text->end )
@@ -518,6 +524,9 @@ static Bool CleanTrailingWhitespace(TidyDocImpl* doc, Node* node)
 {
     Node* next;
 
+    if( cfgBool( doc, OptBoolUnofficial_KeepMySpaces ) )
+        return no;
+
     if (!TY_(nodeIsText)(node))
         return no;
 
@@ -567,6 +576,9 @@ static Bool CleanTrailingWhitespace(TidyDocImpl* doc, Node* node)
 
 static Bool CleanLeadingWhitespace(TidyDocImpl* ARG_UNUSED(doc), Node* node)
 {
+    if( cfgBool( doc, OptBoolUnofficial_KeepMySpaces ) )
+        return no;
+
     if (!TY_(nodeIsText)(node))
         return no;
 
@@ -602,6 +614,9 @@ static Bool CleanLeadingWhitespace(TidyDocImpl* ARG_UNUSED(doc), Node* node)
 static void CleanSpaces(TidyDocImpl* doc, Node* node)
 {
     Node* next;
+
+    if( cfgBool( doc, OptBoolUnofficial_KeepMySpaces ) )
+        return;
 
     while (node)
     {
@@ -646,6 +661,9 @@ static void CleanSpaces(TidyDocImpl* doc, Node* node)
 static void TrimSpaces( TidyDocImpl* doc, Node *element)
 {
     Node* text = element->content;
+
+    if( cfgBool( doc, OptBoolUnofficial_KeepMySpaces ) )
+        return;
 
     if (nodeIsPRE(element) || IsPreDescendant(element))
         return;
@@ -1372,9 +1390,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             }
 
             element->closed = yes;
-
-            if( !cfgBool( doc, OptBoolUnofficial_KeepMySpaces ) )
-                TrimSpaces( doc, element );
+            TrimSpaces( doc, element );
 
             return;
         }
@@ -4228,9 +4244,7 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
     AttributeChecks(doc, &doc->root);
     ReplaceObsoleteElements(doc, &doc->root);
     TY_(DropEmptyElements)(doc, &doc->root);
-
-    if( !cfgBool( doc, OptBoolUnofficial_KeepMySpaces ) )
-        CleanSpaces(doc, &doc->root);
+    CleanSpaces(doc, &doc->root);
 
     if (cfgBool(doc, TidyEncloseBodyText))
         EncloseBodyText(doc);

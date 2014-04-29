@@ -16,6 +16,15 @@
 /build/msvc2010/Release/
 /build/msvc2010/ipch/
 /build/msvc2010/tidy.opensdf
+/build/msvc2013/Obj/
+/build/msvc2013/Debugtidydll/
+/build/msvc2013/Debugtidylib/
+/build/msvc2013/Debug/
+/build/msvc2013/Releasetidydll/
+/build/msvc2013/Releasetidylib/
+/build/msvc2013/Release/
+/build/msvc2013/ipch/
+/build/msvc2013/tidy.opensdf
 /htmldoc/tidy-config.xml
 /htmldoc/tidy-help.xml
 /htmldoc/tidy.1
